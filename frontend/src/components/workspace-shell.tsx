@@ -94,6 +94,7 @@ export function WorkspaceShell({ title, children, actions }: WorkspaceShellProps
 
   return (
     <div className="workspace">
+      <a className="skip-link" href="#workspace-main">Skip to workspace content</a>
       <aside className={`sidebar ${drawerOpen ? "sidebar-open" : ""}`} aria-label="Primary navigation" id="workspace-navigation">
         <div className="sidebar-brand">
           <p className="wordmark">Veridian</p>
@@ -161,7 +162,7 @@ export function WorkspaceShell({ title, children, actions }: WorkspaceShellProps
             </div>
           </div>
         </header>
-        <main className="app-main">{children}</main>
+        <main className="app-main" id="workspace-main">{children}</main>
       </div>
     </div>
   );
