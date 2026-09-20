@@ -1,0 +1,20 @@
+{
+  "name": "@veridian/domain",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./engine.d.mts",
+      "import": "./engine.mjs"
+    },
+    "./auth": {
+      "types": "./auth.d.mts",
+      "import": "./auth.mjs"
+    }
+  },
+  "scripts": {
+    "test": "node --test engine.test.mjs auth.test.mjs",
+    "fixtures": "node run-fixtures.mjs"
+  }
+}

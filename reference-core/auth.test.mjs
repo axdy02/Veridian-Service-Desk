@@ -1,0 +1,7 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {hashPassword,verifyPassword,newSessionToken,hashSessionToken,generateLocalPasscode,validatePassword} from './auth.mjs';
+test('password hash is salted and verifies only the matching password',async()=>{const p='a long unique test password';const h=await hashPassword(p);assert.notEqual(h,p);assert.equal(await verifyPassword(p,h),true);assert.equal(await verifyPassword('a different long password',h),false);assert.notEqual(await hashPassword(p),h);});
+test('password validation enforces size limits without trimming',()=>{assert.throws(()=>validatePassword('short'));assert.throws(()=>validatePassword('x'.repeat(129)));assert.doesNotThrow(()=>validatePassword(' '.repeat(12)));});
+test('malformed or attacker-supplied scrypt parameters are rejected',async()=>{assert.equal(await verifyPassword('long enough password','scrypt$999999$8$1$xx$yy'),false);assert.equal(await verifyPassword('password',null),false);});
+test('session tokens are random and only a digest is stored',()=>{const a=newSessionToken(),b=newSessionToken();assert.notEqual(a,b);assert.match(a,/^[a-f0-9]{64}$/);assert.notEqual(hashSessionToken(a),a);assert.equal(hashSessionToken(a).length,64);});
+test('private reviewer passcodes are random, not common defaults',()=>{const a=generateLocalPasscode();assert.equal(a.length,32);assert.notEqual(a,generateLocalPasscode());});

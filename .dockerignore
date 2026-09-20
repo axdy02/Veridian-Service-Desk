@@ -1,0 +1,29 @@
+# Dependencies and build output
+node_modules/
+**/node_modules/
+.next/
+**/.next/
+dist/
+**/dist/
+coverage/
+playwright-report/
+test-results/
+
+# Local configuration, credentials, and private handoff material
+.env
+.env.*
+!.env.example
+private/
+private-handoff/
+**/*CREDENTIALS*.txt
+*.pem
+*.key
+
+# Repository/editor noise
+.git/
+.github/
+*.log
+.DS_Store
+Thumbs.db
+work/
+outputs/

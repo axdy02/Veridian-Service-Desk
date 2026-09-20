@@ -1,0 +1,308 @@
+[
+  {
+    "caseId": "REQ-01",
+    "expected": {
+      "category": "LAPTOP",
+      "reasonCode": "LAPTOP_POLICY_CONFLICT",
+      "disposition": "HUMAN_REVIEW",
+      "route": "IT_FINANCE",
+      "sourceIds": [
+        "KB-03",
+        "ASSET-01"
+      ]
+    },
+    "acceptanceNote": "Unverified dead laptop, age 3.5 years. Surface both conflicting sources, verify failure/approvals through human review, no guessed policy precedence or delivery promise."
+  },
+  {
+    "caseId": "REQ-02",
+    "expected": {
+      "category": "GUEST_WIFI",
+      "reasonCode": "GUEST_WIFI_INFORMATION",
+      "disposition": "SELF_SERVICE",
+      "route": null,
+      "sourceIds": [
+        "KB-07"
+      ]
+    },
+    "acceptanceNote": "Answer the guest-access question; create an audit/interaction record but no formal service ticket. Credentials are not actually generated."
+  },
+  {
+    "caseId": "REQ-03",
+    "expected": {
+      "category": "PASSWORD",
+      "reasonCode": "MANUAL_ACCOUNT_UNLOCK",
+      "disposition": "HUMAN_REVIEW",
+      "route": "IT",
+      "sourceIds": [
+        "KB-01"
+      ]
+    },
+    "acceptanceNote": "Keep reset-queued progress visible. Manual IT unlock remains necessary; no automated unlock or repeated password-guess advice."
+  },
+  {
+    "caseId": "REQ-04",
+    "expected": {
+      "category": "SOFTWARE",
+      "reasonCode": "SECURITY_REVIEW_ALREADY_PENDING",
+      "disposition": "CONTINUE_EXISTING",
+      "route": "SECURITY",
+      "sourceIds": [
+        "KB-04"
+      ]
+    },
+    "acceptanceNote": "Keep existing Security review; 3-5 business days is a policy duration, not an inferred deadline."
+  },
+  {
+    "caseId": "REQ-05",
+    "expected": {
+      "category": "VPN",
+      "reasonCode": "VPN_RENEWAL_GUIDANCE",
+      "disposition": "SELF_SERVICE",
+      "route": null,
+      "sourceIds": [
+        "KB-02"
+      ]
+    },
+    "acceptanceNote": "Provide employee renewal guidance; wait for confirmation before calling the technical issue resolved."
+  },
+  {
+    "caseId": "REQ-06",
+    "expected": {
+      "category": "PRINTER",
+      "reasonCode": "TECHNICIAN_ALREADY_ASSIGNED",
+      "disposition": "CONTINUE_EXISTING",
+      "route": "IT",
+      "sourceIds": [
+        "KB-05"
+      ]
+    },
+    "acceptanceNote": "Keep the assigned technician; do not restart the entire workflow or claim troubleshooting steps have happened."
+  },
+  {
+    "caseId": "REQ-07",
+    "expected": {
+      "category": "WFH",
+      "reasonCode": "WFH_MANAGER_FINANCE_REQUIRED",
+      "disposition": "HUMAN_REVIEW",
+      "route": "MANAGER_FINANCE",
+      "sourceIds": [
+        "KB-10"
+      ]
+    },
+    "acceptanceNote": "4 days meets frequency threshold. One-time use and manager/Finance approvals are not established. No invented allowance amount."
+  },
+  {
+    "caseId": "REQ-08",
+    "expected": {
+      "category": "SECURITY",
+      "reasonCode": "SECURITY_ESCALATION_ALREADY_OPEN",
+      "disposition": "CONTINUE_EXISTING",
+      "route": "SECURITY",
+      "sourceIds": [
+        "KB-09"
+      ]
+    },
+    "acceptanceNote": "Immediately stop forwarding, advise the supplied Security address, retain existing escalation. No real outbound email."
+  },
+  {
+    "caseId": "REQ-09",
+    "expected": {
+      "category": "MAILBOX",
+      "reasonCode": "MAILBOX_ARCHIVE_GUIDANCE",
+      "disposition": "SELF_SERVICE",
+      "route": null,
+      "sourceIds": [
+        "KB-06"
+      ]
+    },
+    "acceptanceNote": "Archive first; do not infer actual quota or grant an increase. Manager sign-off and 50GB cap for increases."
+  },
+  {
+    "caseId": "REQ-10",
+    "expected": {
+      "category": "PRIVILEGED_ACCESS",
+      "reasonCode": "PRIVILEGED_ACCESS_POLICY_GAP",
+      "disposition": "HUMAN_REVIEW",
+      "route": "IT",
+      "sourceIds": []
+    },
+    "acceptanceNote": "No admin-access policy exists in the pack. Human IT review; historical rejection TK-1050 is context only. Urgency is not authority."
+  },
+  {
+    "caseId": "REQ-11",
+    "expected": {
+      "category": "VPN",
+      "reasonCode": "CONTRACTOR_VPN_MANAGER_APPROVAL",
+      "disposition": "HUMAN_REVIEW",
+      "route": "MANAGER",
+      "sourceIds": [
+        "KB-02"
+      ]
+    },
+    "acceptanceNote": "Contractor VPN needs manager approval through the access request form; no invented URL."
+  },
+  {
+    "caseId": "REQ-12",
+    "expected": {
+      "category": "EXPENSE",
+      "reasonCode": "EXPENSE_ACCOUNT_EXISTENCE_UNKNOWN",
+      "disposition": "NEEDS_INFO",
+      "route": null,
+      "sourceIds": [
+        "KB-08"
+      ]
+    },
+    "acceptanceNote": "Retain the unanswered screenshot request, do not repeat it automatically. Existing account versus provisioning remains unknown; clarify."
+  },
+  {
+    "caseId": "REQ-13",
+    "expected": {
+      "category": "LAPTOP",
+      "reasonCode": "LAPTOP_REPAIR_ASSESSMENT",
+      "disposition": "HUMAN_REVIEW",
+      "route": "IT",
+      "sourceIds": [
+        "KB-03",
+        "ASSET-01"
+      ]
+    },
+    "acceptanceNote": "IT assessment before replacement; flickering and age 2 years do not prove verified hardware failure. Do not offer an invented repair procedure."
+  },
+  {
+    "caseId": "REQ-14",
+    "expected": {
+      "category": "SOFTWARE",
+      "reasonCode": "SOFTWARE_CATALOG_UNKNOWN",
+      "disposition": "NEEDS_INFO",
+      "route": null,
+      "sourceIds": [
+        "KB-04"
+      ]
+    },
+    "acceptanceNote": "Catalog membership and exact extension identity unknown. Ask before choosing self-install versus Security review."
+  },
+  {
+    "caseId": "REQ-15",
+    "expected": {
+      "category": "UNKNOWN",
+      "reasonCode": "ISSUE_UNCLEAR",
+      "disposition": "NEEDS_INFO",
+      "route": null,
+      "sourceIds": []
+    },
+    "acceptanceNote": "Ask affected service and observed error. No made-up category, policy or confidence percentage."
+  },
+  {
+    "caseId": "TK-1042",
+    "expected": {
+      "reasonCode": "CLOSED_HISTORY_ONLY",
+      "disposition": "HISTORY_ONLY",
+      "route": null,
+      "sourceIds": []
+    },
+    "acceptanceNote": "Closed history only. No mutation, reopening, duplicate ticket, model call or generated resolution."
+  },
+  {
+    "caseId": "TK-1043",
+    "expected": {
+      "category": "LAPTOP",
+      "reasonCode": "APPROVED_FULFILLMENT_CONFLICT",
+      "disposition": "CONTINUE_EXISTING",
+      "route": "IT_FINANCE",
+      "sourceIds": [
+        "KB-03",
+        "ASSET-01"
+      ]
+    },
+    "acceptanceNote": "Approved is not closed here. Keep pending fulfillment and approval history, flag 3.2-year policy conflict and verify sign-off provenance; neither ship nor revoke approval."
+  },
+  {
+    "caseId": "TK-1044",
+    "expected": {
+      "category": "SOFTWARE",
+      "reasonCode": "SECURITY_REVIEW_ALREADY_PENDING",
+      "disposition": "CONTINUE_EXISTING",
+      "route": "SECURITY",
+      "sourceIds": [
+        "KB-04"
+      ]
+    },
+    "acceptanceNote": "Active existing Security review; preserve and route, no duplicate review."
+  },
+  {
+    "caseId": "TK-1045",
+    "expected": {
+      "reasonCode": "CLOSED_HISTORY_ONLY",
+      "disposition": "HISTORY_ONLY",
+      "route": null,
+      "sourceIds": []
+    },
+    "acceptanceNote": "Closed history only. No mutation, reopening, duplicate ticket, model call or generated resolution."
+  },
+  {
+    "caseId": "TK-1046",
+    "expected": {
+      "reasonCode": "CLOSED_HISTORY_ONLY",
+      "disposition": "HISTORY_ONLY",
+      "route": null,
+      "sourceIds": []
+    },
+    "acceptanceNote": "Closed history only. No mutation, reopening, duplicate ticket, model call or generated resolution."
+  },
+  {
+    "caseId": "TK-1047",
+    "expected": {
+      "category": "WFH",
+      "reasonCode": "FINANCE_REVIEW_ALREADY_PENDING",
+      "disposition": "CONTINUE_EXISTING",
+      "route": "FINANCE",
+      "sourceIds": [
+        "KB-10"
+      ]
+    },
+    "acceptanceNote": "Active pending Finance, not approved or shipped; keep status."
+  },
+  {
+    "caseId": "TK-1048",
+    "expected": {
+      "category": "SECURITY",
+      "reasonCode": "SECURITY_ESCALATION_ALREADY_OPEN",
+      "disposition": "CONTINUE_EXISTING",
+      "route": "SECURITY",
+      "sourceIds": [
+        "KB-09"
+      ]
+    },
+    "acceptanceNote": "Active Security investigation, not resolved; keep escalation open."
+  },
+  {
+    "caseId": "TK-1049",
+    "expected": {
+      "reasonCode": "CLOSED_HISTORY_ONLY",
+      "disposition": "HISTORY_ONLY",
+      "route": null,
+      "sourceIds": []
+    },
+    "acceptanceNote": "Closed history only. No mutation, reopening, duplicate ticket, model call or generated resolution."
+  },
+  {
+    "caseId": "TK-1050",
+    "expected": {
+      "reasonCode": "CLOSED_HISTORY_ONLY",
+      "disposition": "HISTORY_ONLY",
+      "route": null,
+      "sourceIds": []
+    },
+    "acceptanceNote": "Closed history only. No mutation, reopening, duplicate ticket, model call or generated resolution."
+  },
+  {
+    "caseId": "TK-1051",
+    "expected": {
+      "reasonCode": "CLOSED_HISTORY_ONLY",
+      "disposition": "HISTORY_ONLY",
+      "route": null,
+      "sourceIds": []
+    },
+    "acceptanceNote": "Closed history only. No mutation, reopening, duplicate ticket, model call or generated resolution."
+  }
+]

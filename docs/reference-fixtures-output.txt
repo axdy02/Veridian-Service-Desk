@@ -1,0 +1,29 @@
+┌─────────┬───────────┬─────────────────────┬─────────────────────┬─────────────────────────────────────┬───────────────────┐
+│ (index) │ id        │ category            │ decision            │ reason                              │ route             │
+├─────────┼───────────┼─────────────────────┼─────────────────────┼─────────────────────────────────────┼───────────────────┤
+│ 0       │ 'REQ-01'  │ 'LAPTOP'            │ 'HUMAN_REVIEW'      │ 'LAPTOP_POLICY_CONFLICT'            │ 'IT_FINANCE'      │
+│ 1       │ 'REQ-02'  │ 'GUEST_WIFI'        │ 'SELF_SERVICE'      │ 'GUEST_WIFI_INFORMATION'            │ '-'               │
+│ 2       │ 'REQ-03'  │ 'PASSWORD'          │ 'HUMAN_REVIEW'      │ 'MANUAL_ACCOUNT_UNLOCK'             │ 'IT'              │
+│ 3       │ 'REQ-04'  │ 'SOFTWARE'          │ 'CONTINUE_EXISTING' │ 'SECURITY_REVIEW_ALREADY_PENDING'   │ 'SECURITY'        │
+│ 4       │ 'REQ-05'  │ 'VPN'               │ 'SELF_SERVICE'      │ 'VPN_RENEWAL_GUIDANCE'              │ '-'               │
+│ 5       │ 'REQ-06'  │ 'PRINTER'           │ 'CONTINUE_EXISTING' │ 'TECHNICIAN_ALREADY_ASSIGNED'       │ 'IT'              │
+│ 6       │ 'REQ-07'  │ 'WFH'               │ 'HUMAN_REVIEW'      │ 'WFH_MANAGER_FINANCE_REQUIRED'      │ 'MANAGER_FINANCE' │
+│ 7       │ 'REQ-08'  │ 'SECURITY'          │ 'CONTINUE_EXISTING' │ 'SECURITY_ESCALATION_ALREADY_OPEN'  │ 'SECURITY'        │
+│ 8       │ 'REQ-09'  │ 'MAILBOX'           │ 'SELF_SERVICE'      │ 'MAILBOX_ARCHIVE_GUIDANCE'          │ '-'               │
+│ 9       │ 'REQ-10'  │ 'PRIVILEGED_ACCESS' │ 'HUMAN_REVIEW'      │ 'PRIVILEGED_ACCESS_POLICY_GAP'      │ 'IT'              │
+│ 10      │ 'REQ-11'  │ 'VPN'               │ 'HUMAN_REVIEW'      │ 'CONTRACTOR_VPN_MANAGER_APPROVAL'   │ 'MANAGER'         │
+│ 11      │ 'REQ-12'  │ 'EXPENSE'           │ 'NEEDS_INFO'        │ 'EXPENSE_ACCOUNT_EXISTENCE_UNKNOWN' │ '-'               │
+│ 12      │ 'REQ-13'  │ 'LAPTOP'            │ 'HUMAN_REVIEW'      │ 'LAPTOP_REPAIR_ASSESSMENT'          │ 'IT'              │
+│ 13      │ 'REQ-14'  │ 'SOFTWARE'          │ 'NEEDS_INFO'        │ 'SOFTWARE_CATALOG_UNKNOWN'          │ '-'               │
+│ 14      │ 'REQ-15'  │ 'UNKNOWN'           │ 'NEEDS_INFO'        │ 'ISSUE_UNCLEAR'                     │ '-'               │
+│ 15      │ 'TK-1042' │ 'VPN'               │ 'HISTORY_ONLY'      │ 'CLOSED_HISTORY_ONLY'               │ '-'               │
+│ 16      │ 'TK-1043' │ 'LAPTOP'            │ 'CONTINUE_EXISTING' │ 'APPROVED_FULFILLMENT_CONFLICT'     │ 'IT_FINANCE'      │
+│ 17      │ 'TK-1044' │ 'SOFTWARE'          │ 'CONTINUE_EXISTING' │ 'SECURITY_REVIEW_ALREADY_PENDING'   │ 'SECURITY'        │
+│ 18      │ 'TK-1045' │ 'MAILBOX'           │ 'HISTORY_ONLY'      │ 'CLOSED_HISTORY_ONLY'               │ '-'               │
+│ 19      │ 'TK-1046' │ 'PRINTER'           │ 'HISTORY_ONLY'      │ 'CLOSED_HISTORY_ONLY'               │ '-'               │
+│ 20      │ 'TK-1047' │ 'WFH'               │ 'CONTINUE_EXISTING' │ 'FINANCE_REVIEW_ALREADY_PENDING'    │ 'FINANCE'         │
+│ 21      │ 'TK-1048' │ 'SECURITY'          │ 'CONTINUE_EXISTING' │ 'SECURITY_ESCALATION_ALREADY_OPEN'  │ 'SECURITY'        │
+│ 22      │ 'TK-1049' │ 'PASSWORD'          │ 'HISTORY_ONLY'      │ 'CLOSED_HISTORY_ONLY'               │ '-'               │
+│ 23      │ 'TK-1050' │ 'PRIVILEGED_ACCESS' │ 'HISTORY_ONLY'      │ 'CLOSED_HISTORY_ONLY'               │ '-'               │
+│ 24      │ 'TK-1051' │ 'GUEST_WIFI'        │ 'HISTORY_ONLY'      │ 'CLOSED_HISTORY_ONLY'               │ '-'               │
+└─────────┴───────────┴─────────────────────┴─────────────────────┴─────────────────────────────────────┴───────────────────┘

@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+# Keyless verification: the kernel suite, strict typechecks, production builds, the
+# database/API integration suite and the secret scan all run without any user secret.
+# No Gemini key is needed; the API runs in its labelled offline mode.
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: veridian_service_desk
+          POSTGRES_USER: veridian_local
+          POSTGRES_PASSWORD: ci-local-password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U veridian_local -d veridian_service_desk"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+    env:
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: veridian_service_desk
+      POSTGRES_USER: veridian_local
+      POSTGRES_PASSWORD: ci-local-password
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run scan:secrets

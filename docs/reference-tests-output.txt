@@ -1,0 +1,442 @@
+TAP version 13
+# Subtest: password hash is salted and verifies only the matching password
+ok 1 - password hash is salted and verifies only the matching password
+  ---
+  duration_ms: 870.115337
+  type: 'test'
+  ...
+# Subtest: password validation enforces size limits without trimming
+ok 2 - password validation enforces size limits without trimming
+  ---
+  duration_ms: 0.357626
+  type: 'test'
+  ...
+# Subtest: malformed or attacker-supplied scrypt parameters are rejected
+ok 3 - malformed or attacker-supplied scrypt parameters are rejected
+  ---
+  duration_ms: 0.131617
+  type: 'test'
+  ...
+# Subtest: session tokens are random and only a digest is stored
+ok 4 - session tokens are random and only a digest is stored
+  ---
+  duration_ms: 0.554411
+  type: 'test'
+  ...
+# Subtest: private reviewer passcodes are random, not common defaults
+ok 5 - private reviewer passcodes are random, not common defaults
+  ---
+  duration_ms: 0.215553
+  type: 'test'
+  ...
+# Subtest: source case REQ-01
+ok 6 - source case REQ-01
+  ---
+  duration_ms: 4.120446
+  type: 'test'
+  ...
+# Subtest: source case REQ-02
+ok 7 - source case REQ-02
+  ---
+  duration_ms: 0.975683
+  type: 'test'
+  ...
+# Subtest: source case REQ-03
+ok 8 - source case REQ-03
+  ---
+  duration_ms: 0.380911
+  type: 'test'
+  ...
+# Subtest: source case REQ-04
+ok 9 - source case REQ-04
+  ---
+  duration_ms: 0.188222
+  type: 'test'
+  ...
+# Subtest: source case REQ-05
+ok 10 - source case REQ-05
+  ---
+  duration_ms: 0.15361
+  type: 'test'
+  ...
+# Subtest: source case REQ-06
+ok 11 - source case REQ-06
+  ---
+  duration_ms: 0.151377
+  type: 'test'
+  ...
+# Subtest: source case REQ-07
+ok 12 - source case REQ-07
+  ---
+  duration_ms: 0.103776
+  type: 'test'
+  ...
+# Subtest: source case REQ-08
+ok 13 - source case REQ-08
+  ---
+  duration_ms: 0.119179
+  type: 'test'
+  ...
+# Subtest: source case REQ-09
+ok 14 - source case REQ-09
+  ---
+  duration_ms: 0.852678
+  type: 'test'
+  ...
+# Subtest: source case REQ-10
+ok 15 - source case REQ-10
+  ---
+  duration_ms: 0.42023
+  type: 'test'
+  ...
+# Subtest: source case REQ-11
+ok 16 - source case REQ-11
+  ---
+  duration_ms: 0.204056
+  type: 'test'
+  ...
+# Subtest: source case REQ-12
+ok 17 - source case REQ-12
+  ---
+  duration_ms: 0.085318
+  type: 'test'
+  ...
+# Subtest: source case REQ-13
+ok 18 - source case REQ-13
+  ---
+  duration_ms: 0.088072
+  type: 'test'
+  ...
+# Subtest: source case REQ-14
+ok 19 - source case REQ-14
+  ---
+  duration_ms: 0.065658
+  type: 'test'
+  ...
+# Subtest: source case REQ-15
+ok 20 - source case REQ-15
+  ---
+  duration_ms: 0.205468
+  type: 'test'
+  ...
+# Subtest: source case TK-1042
+ok 21 - source case TK-1042
+  ---
+  duration_ms: 0.100851
+  type: 'test'
+  ...
+# Subtest: source case TK-1043
+ok 22 - source case TK-1043
+  ---
+  duration_ms: 0.538247
+  type: 'test'
+  ...
+# Subtest: source case TK-1044
+ok 23 - source case TK-1044
+  ---
+  duration_ms: 0.072318
+  type: 'test'
+  ...
+# Subtest: source case TK-1045
+ok 24 - source case TK-1045
+  ---
+  duration_ms: 0.064196
+  type: 'test'
+  ...
+# Subtest: source case TK-1046
+ok 25 - source case TK-1046
+  ---
+  duration_ms: 0.059869
+  type: 'test'
+  ...
+# Subtest: source case TK-1047
+ok 26 - source case TK-1047
+  ---
+  duration_ms: 0.05324
+  type: 'test'
+  ...
+# Subtest: source case TK-1048
+ok 27 - source case TK-1048
+  ---
+  duration_ms: 0.049494
+  type: 'test'
+  ...
+# Subtest: source case TK-1049
+ok 28 - source case TK-1049
+  ---
+  duration_ms: 0.04706
+  type: 'test'
+  ...
+# Subtest: source case TK-1050
+ok 29 - source case TK-1050
+  ---
+  duration_ms: 0.042864
+  type: 'test'
+  ...
+# Subtest: source case TK-1051
+ok 30 - source case TK-1051
+  ---
+  duration_ms: 0.091597
+  type: 'test'
+  ...
+# Subtest: exact source coverage: 11 policies, 15 requests, 4 active tickets, 6 closed tickets
+ok 31 - exact source coverage: 11 policies, 15 requests, 4 active tickets, 6 closed tickets
+  ---
+  duration_ms: 0.118828
+  type: 'test'
+  ...
+# Subtest: laptop retrieval expands to both conflicting sources
+ok 32 - laptop retrieval expands to both conflicting sources
+  ---
+  duration_ms: 0.059299
+  type: 'test'
+  ...
+# Subtest: missing conflicting source fails closed
+ok 33 - missing conflicting source fails closed
+  ---
+  duration_ms: 0.11999
+  type: 'test'
+  ...
+# Subtest: closed case cannot be reopened by threatening user text
+ok 34 - closed case cannot be reopened by threatening user text
+  ---
+  duration_ms: 0.064847
+  type: 'test'
+  ...
+# Subtest: history never requires an additional service ticket
+ok 35 - history never requires an additional service ticket
+  ---
+  duration_ms: 0.056274
+  type: 'test'
+  ...
+# Subtest: password exactly 5 failed attempts requires manual IT unlock
+ok 36 - password exactly 5 failed attempts requires manual IT unlock
+  ---
+  duration_ms: 0.256254
+  type: 'test'
+  ...
+# Subtest: password fewer than 5 and no lockout allows self-service guidance
+ok 37 - password fewer than 5 and no lockout allows self-service guidance
+  ---
+  duration_ms: 0.084196
+  type: 'test'
+  ...
+# Subtest: explicit lockout overrides an absent attempt count
+ok 38 - explicit lockout overrides an absent attempt count
+  ---
+  duration_ms: 0.067151
+  type: 'test'
+  ...
+# Subtest: WFH exactly 3 days does not meet more-than-3 condition
+ok 39 - WFH exactly 3 days does not meet more-than-3 condition
+  ---
+  duration_ms: 0.164937
+  type: 'test'
+  ...
+# Subtest: WFH 4 days still needs manager and Finance
+ok 40 - WFH 4 days still needs manager and Finance
+  ---
+  duration_ms: 0.079429
+  type: 'test'
+  ...
+# Subtest: WFH previously used allowance is not granted a second time
+ok 41 - WFH previously used allowance is not granted a second time
+  ---
+  duration_ms: 0.179589
+  type: 'test'
+  ...
+# Subtest: WFH unknown days needs information, not a guessed entitlement
+ok 42 - WFH unknown days needs information, not a guessed entitlement
+  ---
+  duration_ms: 0.078999
+  type: 'test'
+  ...
+# Subtest: mailbox 50GB request still needs manager signoff
+ok 43 - mailbox 50GB request still needs manager signoff
+  ---
+  duration_ms: 0.177997
+  type: 'test'
+  ...
+# Subtest: mailbox 51GB exceeds absolute supplied cap
+ok 44 - mailbox 51GB exceeds absolute supplied cap
+  ---
+  duration_ms: 0.075824
+  type: 'test'
+  ...
+# Subtest: mailbox actual current usage is not fabricated
+ok 45 - mailbox actual current usage is not fabricated
+  ---
+  duration_ms: 0.233721
+  type: 'test'
+  ...
+# Subtest: unknown catalog membership requires clarification
+ok 46 - unknown catalog membership requires clarification
+  ---
+  duration_ms: 0.074813
+  type: 'test'
+  ...
+# Subtest: employee catalog claim results in conditional guidance, not verification
+ok 47 - employee catalog claim results in conditional guidance, not verification
+  ---
+  duration_ms: 0.122193
+  type: 'test'
+  ...
+# Subtest: non-catalog item routes to Security
+ok 48 - non-catalog item routes to Security
+  ---
+  duration_ms: 0.079739
+  type: 'test'
+  ...
+# Subtest: printer persistent issue without tag asks for it
+ok 49 - printer persistent issue without tag asks for it
+  ---
+  duration_ms: 0.090946
+  type: 'test'
+  ...
+# Subtest: printer persistent issue with tag creates local handoff
+ok 50 - printer persistent issue with tag creates local handoff
+  ---
+  duration_ms: 0.135463
+  type: 'test'
+  ...
+# Subtest: expense provisioning goes to Finance
+ok 51 - expense provisioning goes to Finance
+  ---
+  duration_ms: 0.070235
+  type: 'test'
+  ...
+# Subtest: expense existing-account technical issue goes to IT
+ok 52 - expense existing-account technical issue goes to IT
+  ---
+  duration_ms: 0.08002
+  type: 'test'
+  ...
+# Subtest: contractor access is not granted automatically
+ok 53 - contractor access is not granted automatically
+  ---
+  duration_ms: 0.074161
+  type: 'test'
+  ...
+# Subtest: full-time policy answer does not claim provisioning
+ok 54 - full-time policy answer does not claim provisioning
+  ---
+  duration_ms: 0.153851
+  type: 'test'
+  ...
+# Subtest: privileged access does not invent a KB source
+ok 55 - privileged access does not invent a KB source
+  ---
+  duration_ms: 0.092338
+  type: 'test'
+  ...
+# Subtest: privileged access uses TK-1050 only as history
+ok 56 - privileged access uses TK-1050 only as history
+  ---
+  duration_ms: 0.067532
+  type: 'test'
+  ...
+# Subtest: no unknown approval or authority fields survive normalization
+ok 57 - no unknown approval or authority fields survive normalization
+  ---
+  duration_ms: 0.078157
+  type: 'test'
+  ...
+# Subtest: non-finite numeric facts do not survive
+ok 58 - non-finite numeric facts do not survive
+  ---
+  duration_ms: 0.094952
+  type: 'test'
+  ...
+# Subtest: unsupported category becomes UNKNOWN
+ok 59 - unsupported category becomes UNKNOWN
+  ---
+  duration_ms: 0.099068
+  type: 'test'
+  ...
+# Subtest: unquoted model facts are dropped
+ok 60 - unquoted model facts are dropped
+  ---
+  duration_ms: 0.211798
+  type: 'test'
+  ...
+# Subtest: exact quoted facts can be accepted
+ok 61 - exact quoted facts can be accepted
+  ---
+  duration_ms: 0.169294
+  type: 'test'
+  ...
+# Subtest: fabricated quotations are rejected
+ok 62 - fabricated quotations are rejected
+  ---
+  duration_ms: 0.294771
+  type: 'test'
+  ...
+# Subtest: obvious admin request cannot be downgraded by extraction
+ok 63 - obvious admin request cannot be downgraded by extraction
+  ---
+  duration_ms: 0.154201
+  type: 'test'
+  ...
+# Subtest: obvious phishing cannot be downgraded by extraction
+ok 64 - obvious phishing cannot be downgraded by extraction
+  ---
+  duration_ms: 0.145718
+  type: 'test'
+  ...
+# Subtest: five-failure threshold cannot be downgraded by extraction
+ok 65 - five-failure threshold cannot be downgraded by extraction
+  ---
+  duration_ms: 0.364616
+  type: 'test'
+  ...
+# Subtest: safe confirmed self-service issue can close locally
+ok 66 - safe confirmed self-service issue can close locally
+  ---
+  duration_ms: 0.104697
+  type: 'test'
+  ...
+# Subtest: security does not close on employee saying it is resolved
+ok 67 - security does not close on employee saying it is resolved
+  ---
+  duration_ms: 0.082915
+  type: 'test'
+  ...
+# Subtest: unrelated confirmation cannot close privileged-access review
+ok 68 - unrelated confirmation cannot close privileged-access review
+  ---
+  duration_ms: 0.067691
+  type: 'test'
+  ...
+# Subtest: kernel result does not depend on a case identifier
+ok 69 - kernel result does not depend on a case identifier
+  ---
+  duration_ms: 0.116955
+  type: 'test'
+  ...
+# Subtest: simple guest question does not generate a formal service ticket
+ok 70 - simple guest question does not generate a formal service ticket
+  ---
+  duration_ms: 0.122394
+  type: 'test'
+  ...
+# Subtest: fallback can continue an existing software conversation
+ok 71 - fallback can continue an existing software conversation
+  ---
+  duration_ms: 0.077587
+  type: 'test'
+  ...
+# Subtest: kernel has all expected policy IDs
+ok 72 - kernel has all expected policy IDs
+  ---
+  duration_ms: 0.075854
+  type: 'test'
+  ...
+1..72
+# tests 72
+# suites 0
+# pass 72
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 921.703302

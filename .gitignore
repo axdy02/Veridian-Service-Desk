@@ -1,0 +1,15 @@
+node_modules/
+.next/
+dist/
+.env
+.env.*
+!.env.example
+private/
+**/*CREDENTIALS*.txt
+!private-handoff/CREDENTIALS_TEMPLATE.txt
+playwright-report/
+test-results/
+*.log
+
+# Local agent-skill tooling (installed at the user's request, not project code).
+.agents/

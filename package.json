@@ -1,0 +1,43 @@
+{
+  "name": "veridian-service-desk",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A source-grounded internal service desk assessment prototype.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.16.0 <25"
+  },
+  "workspaces": [
+    "apps/*",
+    "reference-core"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,web -c yellow,green \"npm run dev --workspace=@veridian/api\" \"npm run dev --workspace=@veridian/web\"",
+    "dev:api": "npm run dev --workspace=@veridian/api",
+    "dev:web": "npm run dev --workspace=@veridian/web",
+    "build": "npm run build --workspace=@veridian/api && npm run build --workspace=@veridian/web",
+    "start": "concurrently -n api,web -c yellow,green \"npm run start --workspace=@veridian/api\" \"npm run start --workspace=@veridian/web\"",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "db:seed": "tsx scripts/seed.ts",
+    "db:bootstrap": "npm run db:migrate && npm run db:seed",
+    "setup": "tsx scripts/setup.ts",
+    "doctor": "tsx scripts/doctor.ts",
+    "check": "npm run typecheck --workspace=@veridian/api && npm run typecheck --workspace=@veridian/web && node --test reference-core/engine.test.mjs reference-core/auth.test.mjs && npm run build && npm run test:integration",
+    "test": "node --test reference-core/engine.test.mjs reference-core/auth.test.mjs",
+    "test:integration": "node --import tsx --test tests/integration/api.integration.test.ts",
+    "test:e2e": "playwright test",
+    "smoke:gemini": "tsx scripts/smoke-gemini.ts",
+    "scan:secrets": "tsx scripts/scan-secrets.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.58.2",
+    "@types/cookie-parser": "1.4.10",
+    "@types/express": "5.0.6",
+    "@types/node": "24.10.11",
+    "@types/pg": "8.15.6",
+    "concurrently": "9.2.1",
+    "esbuild": "0.28.2",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2"
+  }
+}
