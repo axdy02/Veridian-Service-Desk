@@ -16,12 +16,27 @@ type WorkspaceShellProps = {
 };
 
 const navigation = [
-  { href: "/inbox", label: "Inbox", marker: "I" },
-  { href: "/tickets", label: "Tickets", marker: "T" },
-  { href: "/knowledge", label: "Knowledge", marker: "K" },
-  { href: "/audit", label: "Audit", marker: "A" },
-  { href: "/settings", label: "Settings", marker: "S" }
-];
+  { href: "/inbox", label: "Inbox", icon: "inbox" },
+  { href: "/tickets", label: "Tickets", icon: "ticket" },
+  { href: "/knowledge", label: "Knowledge", icon: "book" },
+  { href: "/audit", label: "Audit", icon: "audit" },
+  { href: "/settings", label: "Settings", icon: "settings" }
+] as const;
+
+type IconName = (typeof navigation)[number]["icon"] | "chevron";
+
+function NavigationIcon({ name }: { name: IconName }) {
+  const paths: Record<IconName, ReactNode> = {
+    inbox: <><path d="M4 5.5h16v13H4z" /><path d="M4 14h4l2 2h4l2-2h4" /></>,
+    ticket: <><path d="M5 5h14v4a2.5 2.5 0 0 0 0 5v5H5v-5a2.5 2.5 0 0 0 0-5z" /><path d="M12 8v8" /></>,
+    book: <><path d="M4.5 5.5A3.5 3.5 0 0 1 8 4h4v15H8a3.5 3.5 0 0 0-3.5 1.5z" /><path d="M19.5 5.5A3.5 3.5 0 0 0 16 4h-4v15h4a3.5 3.5 0 0 1 3.5 1.5z" /></>,
+    audit: <><path d="M6 3.5h12v17H6z" /><path d="M9 8h6M9 12h6M9 16h4" /></>,
+    settings: <><circle cx="12" cy="12" r="3" /><path d="M19 12a7 7 0 0 0-.1-1l2-1.5-2-3.4-2.4 1A7 7 0 0 0 14.8 6L14.5 3h-5L9.2 6a7 7 0 0 0-1.7 1.1l-2.4-1-2 3.4 2 1.5a7 7 0 0 0 0 2l-2 1.5 2 3.4 2.4-1A7 7 0 0 0 9.2 18l.3 3h5l.3-3a7 7 0 0 0 1.7-1.1l2.4 1 2-3.4-2-1.5a7 7 0 0 0 .1-1z" /></>,
+    chevron: <path d="m9 8 4 4-4 4" />
+  };
+
+  return <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">{paths[name]}</svg>;
+}
 
 function modeLabel(runtime: RuntimeSettings | null): string {
   const mode = (runtime?.agentMode ?? runtime?.mode ?? "").toLowerCase();
@@ -97,8 +112,8 @@ export function WorkspaceShell({ title, children, actions }: WorkspaceShellProps
       <a className="skip-link" href="#workspace-main">Skip to workspace content</a>
       <aside className={`sidebar ${drawerOpen ? "sidebar-open" : ""}`} aria-label="Primary navigation" id="workspace-navigation">
         <div className="sidebar-brand">
-          <p className="wordmark">Veridian</p>
-          <p>Service Desk</p>
+          <span className="brand-mark" aria-hidden="true">V</span>
+          <div><p className="wordmark">Veridian</p><p>Service Desk</p></div>
         </div>
         <nav className="sidebar-nav">
           {navigation.map((item) => {
@@ -110,8 +125,9 @@ export function WorkspaceShell({ title, children, actions }: WorkspaceShellProps
                 key={item.href}
                 aria-current={active ? "page" : undefined}
               >
-                <span className="nav-marker" aria-hidden="true">{item.marker}</span>
-                {item.label}
+                <span className="nav-marker"><NavigationIcon name={item.icon} /></span>
+                <span>{item.label}</span>
+                <span className="nav-chevron"><NavigationIcon name="chevron" /></span>
               </Link>
             );
           })}
@@ -148,7 +164,7 @@ export function WorkspaceShell({ title, children, actions }: WorkspaceShellProps
               <button className="user-menu-button" type="button" aria-label="Open account menu" aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>
                 <span className="user-initial" aria-hidden="true">{user.displayName.slice(0, 1).toUpperCase()}</span>
                 <span className="user-name">{user.displayName}</span>
-                <span aria-hidden="true">⌄</span>
+                <span className="account-chevron"><NavigationIcon name="chevron" /></span>
               </button>
               {menuOpen ? (
                 <div className="user-popover" role="menu">

@@ -10,9 +10,9 @@ Node.js and locally managed PostgreSQL workflow.
 ## Problem and scope
 
 Veridian Corp's internal service desk receives employee requests by email and in person.
-This assessment prototype ingests the supplied source week (21–25 Sep 2026, fictional
-data: 11 policy sources, 15 requests, 10 source tickets — 4 active, 6 closed), keeps the
-closed records as immutable history, and processes the 19 active cases through a bounded,
+This local prototype ingests the supplied policy, request, and ticket corpus (11 policy
+sources, 15 requests, 10 source tickets — 4 active, 6 closed), keeps the closed records as
+immutable history, and processes the 19 active cases through a bounded,
 policy-grounded workflow. The system answers with exact supplied policy passages, asks a
 necessary question when the request is unclear, and creates local handoffs for human
 review. It never approves, unlocks, ships or deletes anything outside this sandbox, and it
@@ -75,7 +75,7 @@ runs, and the UI never says "ticket created" before the transaction has committe
 
 `npm run check` runs strict typechecks, the 72 supplied kernel tests, both production
 builds and the database/API integration suite (19 tests) against an isolated `*_test`
-database. `npx playwright test` runs the 15 browser flows (desktop and 390px mobile) in
+database. `npm run test:e2e` runs the 15 browser flows (desktop and 390px mobile) in
 Chromium. Exact commands, results and NOT RUN items are recorded in
 [`docs/TEST_REPORT.md`](docs/TEST_REPORT.md); the API surface is documented in
 [`docs/API_REFERENCE.md`](docs/API_REFERENCE.md) and AI-tool use in
@@ -89,7 +89,7 @@ Chromium. Exact commands, results and NOT RUN items are recorded in
 - No lint toolchain ships with the pack; strict typecheck plus the test suites are the
   enforced gates.
 - No external actions ever occur: no real email, account changes, shipments or approvals.
-- This is a verified assessment prototype, not a production-ready product.
+- This is a verified local prototype, not a production-ready product.
 
 ## Docker quick start
 
