@@ -33,7 +33,7 @@ The app runs in two clearly labelled modes:
   no credits, full functionality.
 - **Gemini:** add a `GEMINI_API_KEY` to the ignored `.env` (server-side only, never in the
   browser) and the extractor uses the configured `GEMINI_MODEL` (default
-  `gemini-2.5-flash`) with a per-turn timeout and no SDK retries. If Gemini is unavailable
+  `gemini-3.1-flash-lite`) with a per-turn timeout and no SDK retries. If Gemini is unavailable
   or returns invalid data, the run falls back to the offline path and is labelled
   `offline-fallback` — it never masquerades as a Gemini completion. Decisions and rendered
   messages always come from the application's own code, so a second model call cannot
@@ -84,8 +84,8 @@ Chromium. Exact commands, results and NOT RUN items are recorded in
 ## Known limitations
 
 - Single local instance; sessions and rate limiting are in-process by design.
-- The Gemini path was not exercised live in this verification (no key configured); the
-  smoke command is `npm run smoke:gemini`.
+- The live Gemini smoke test was verified with `gemini-3.1-flash-lite`; rerun
+  `npm run smoke:gemini` after changing the key or model.
 - No lint toolchain ships with the pack; strict typecheck plus the test suites are the
   enforced gates.
 - No external actions ever occur: no real email, account changes, shipments or approvals.

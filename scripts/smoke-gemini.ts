@@ -2,7 +2,7 @@ import 'dotenv/config';
 import { ChatGoogle } from '@langchain/google';
 
 const apiKey = process.env.GEMINI_API_KEY?.trim();
-const model = process.env.GEMINI_MODEL?.trim() || 'gemini-2.5-flash';
+const model = process.env.GEMINI_MODEL?.trim() || 'gemini-3.1-flash-lite';
 if (!apiKey) {
   console.info('Gemini smoke test NOT RUN: GEMINI_API_KEY is not configured. Offline mode remains available.');
 } else {

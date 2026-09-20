@@ -44,7 +44,7 @@ export const config = {
   cookieSecure: boolFromEnv('COOKIE_SECURE', process.env.NODE_ENV === 'production'),
   agentMode: configuredAgentMode === 'gemini' || configuredAgentMode === 'offline' ? configuredAgentMode : 'auto',
   geminiApiKey: process.env.GEMINI_API_KEY?.trim() || undefined,
-  geminiModel: process.env.GEMINI_MODEL?.trim() || 'gemini-2.5-flash',
+  geminiModel: process.env.GEMINI_MODEL?.trim() || 'gemini-3.1-flash-lite',
   dataDirectory: process.env.VERIDIAN_DATA_DIR?.trim() || resolve(apiDirectory, '../../data'),
   maxJsonBytes: '64kb',
   // Defaults keep the documented local behaviour. The e2e suite raises the caps through env
