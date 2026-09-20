@@ -1,0 +1,117 @@
+erDiagram
+    users ||--o| workspaces : "owns at most one"
+    users ||--o{ sessions : "has"
+    workspaces ||--o{ cases : "contains"
+    cases ||--o{ runs : "investigated through"
+    cases ||--o{ messages : "conversation"
+    runs o|--o{ messages : "optional run attribution"
+    cases ||--o| service_tickets : "zero or one local ticket"
+    workspaces ||--o{ audit_events : "audit scope"
+    cases o|--o{ audit_events : "optional case link"
+    runs o|--o{ audit_events : "optional run link"
+    users o|--o{ audit_events : "optional actor"
+
+    users {
+        uuid id PK
+        text email UK
+        text display_name
+        text password_hash
+        timestamptz created_at
+    }
+    workspaces {
+        uuid id PK
+        uuid owner_user_id FK, UK
+        text name
+        timestamptz created_at
+    }
+    sessions {
+        char_64 token_hash PK
+        uuid user_id FK
+        timestamptz expires_at
+        timestamptz created_at
+    }
+    policies {
+        text id PK
+        text title
+        text body
+        text source_file
+        integer source_page
+        text source_section
+        jsonb metadata
+        tsvector search_vector
+    }
+    cases {
+        uuid id PK
+        uuid workspace_id FK
+        text source_id
+        text source_kind
+        jsonb source_snapshot
+        text source_status
+        date source_date
+        text employee_name
+        text employee_email
+        text original_text
+        text work_state
+        boolean active
+        jsonb facts
+        jsonb fact_evidence
+        jsonb last_decision
+        integer version
+        timestamptz created_at
+        timestamptz updated_at
+    }
+    runs {
+        uuid id PK
+        uuid workspace_id FK
+        uuid case_id FK
+        text idempotency_key
+        char_64 input_hash
+        text status
+        text agent_mode
+        integer case_version
+        jsonb result
+        text safe_error_code
+        timestamptz started_at
+        timestamptz finished_at
+    }
+    messages {
+        uuid id PK
+        uuid workspace_id FK
+        uuid case_id FK
+        uuid run_id FK
+        text role
+        text content
+        jsonb metadata
+        timestamptz created_at
+    }
+    service_tickets {
+        uuid id PK
+        uuid workspace_id FK
+        uuid case_id FK
+        text display_id
+        text route
+        text state
+        text original_status
+        text summary
+        text reason_code
+        jsonb policy_source_ids
+        jsonb history_source_ids
+        timestamptz created_at
+        timestamptz updated_at
+    }
+    audit_events {
+        bigint sequence_id PK
+        uuid id UK
+        uuid workspace_id FK
+        uuid case_id FK
+        uuid run_id FK
+        uuid actor_user_id FK
+        text event_type
+        text node_name
+        jsonb payload
+        timestamptz occurred_at
+    }
+    schema_migrations {
+        text version PK
+        timestamptz applied_at
+    }

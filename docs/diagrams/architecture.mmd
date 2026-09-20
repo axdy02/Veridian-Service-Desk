@@ -1,0 +1,16 @@
+flowchart LR
+    U["Reviewer / employee simulator"] --> W["Next.js + React + TypeScript"]
+    W -->|"Same-origin /api requests"| P["Next.js server-side API proxy"]
+    P --> A["Express API: validation, session and workspace checks"]
+    A --> G["LangGraph stateful workflow"]
+    G --> X["Structured fact extraction"]
+    X -->|"Server-side request only"| M["Gemini via LangChain ChatGoogle"]
+    G --> R["Required policy retrieval"]
+    G --> D["Deterministic policy decision"]
+    D --> T["Transactional local outcome writer"]
+    A -->|"pg / parameterized SQL"| DB[("PostgreSQL")]
+    R --> DB
+    T --> DB
+    G --> E["Execution events / audit"]
+    E --> DB
+    A -->|"Response, citations and run mode"| P

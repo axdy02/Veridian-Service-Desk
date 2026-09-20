@@ -1,0 +1,21 @@
+flowchart TD
+    IN["Analyze / follow-up request"] --> AUTH["Authenticate and resolve workspace"]
+    AUTH --> GUARD["Check case ownership, active flag and version"]
+    GUARD -->|"Inactive / historical"| RO["Read-only response; no agent run"]
+    GUARD -->|"Allowed"| RES["Reserve idempotent run"]
+    RES -->|"Existing key with same input"| REPLAY["Return existing run; no duplicate call"]
+    RES -->|"New run"| LOAD["load_case"]
+    LOAD --> UNDER["understand_issue: extraction and evidence validation"]
+    UNDER --> RET["retrieve_evidence"]
+    RET --> DEC["evaluate_policy"]
+    DEC -->|"NEEDS_INFO"| ASK["ask_followup"]
+    DEC -->|"SELF_SERVICE"| GUIDE["record_guidance"]
+    DEC -->|"Other dispositions"| HUMAN["route_human"]
+    ASK --> COMMIT["commit_outcome: version check and short transaction"]
+    GUIDE --> COMMIT
+    HUMAN --> COMMIT
+    COMMIT -->|"Commit succeeds"| OK["Return saved local result and citations"]
+    COMMIT -->|"Version conflict"| CONFLICT["CONFLICTED: refresh required"]
+    UNDER -.->|"Extraction unavailable"| FALL["Explicit limited offline-fallback mode"]
+    FALL -.-> RET
+    COMMIT -.->|"Write failure"| FAIL["Rollback; no successful-action claim"]

@@ -1,0 +1,29 @@
+sequenceDiagram
+    actor Reviewer
+    participant Web as Next.js UI / proxy
+    participant API as Express API
+    participant DB as PostgreSQL
+    participant Graph as LangGraph
+    participant AI as Gemini
+
+    Reviewer->>Web: Analyze case or send follow-up
+    Web->>API: Session cookie, case ID, idempotency key, expected version
+    API->>DB: Verify session/workspace and reserve run
+    DB-->>API: Run ID or existing run
+    alt New authorized active run
+        API->>Graph: Execute with authorized actor context
+        Graph->>DB: Load case and employee-message history
+        Graph->>AI: Request structured employee facts
+        AI-->>Graph: Facts and supporting quotations
+        Note over Graph: Validate schema/evidence; retrieve policies; apply code rules
+        Graph->>DB: Retrieve required policy rows
+        DB-->>Graph: Policy text and source locations
+        Note over Graph,DB: Model call is outside the final write transaction
+        Graph->>DB: BEGIN; check case version; save outcome, messages, ticket if required, audit; COMMIT
+        DB-->>Graph: Persisted receipt
+        Graph-->>API: Result, sources and actual mode
+        API-->>Web: Saved outcome
+        Web-->>Reviewer: Guidance, follow-up or local handoff
+    else Repeated idempotency key with same input
+        API-->>Web: Existing run; no new write or model call
+    end
