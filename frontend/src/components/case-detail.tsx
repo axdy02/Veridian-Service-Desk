@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import { api, errorMessage, makeIdempotencyKey } from "@/lib/api";
-import { formatDate, formatDateTime, labelFor } from "@/lib/format";
+import { formatDate, formatDateTime, labelFor, sourceLabel } from "@/lib/format";
 import {
   list,
   normaliseCase,
@@ -45,7 +45,7 @@ function sourceCard(policy: Policy, compact = false) {
       <span className="source-card-id">{policy.id}</span>
       <strong>{policy.title || "Source passage"}</strong>
       {policy.text ? <span>{policy.text}</span> : null}
-      {!compact ? <small>{policy.sourceFile ?? "Source record"}{policy.page ? ` · p. ${policy.page}` : ""}</small> : null}
+      {!compact ? <small>{sourceLabel(policy.sourceFile)}{policy.page ? ` · p. ${policy.page}` : ""}</small> : null}
     </Link>
   );
 }

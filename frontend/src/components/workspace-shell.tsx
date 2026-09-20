@@ -7,7 +7,7 @@ import { api, errorMessage, isApiError } from "@/lib/api";
 import { labelFor } from "@/lib/format";
 import { normaliseRuntime, normaliseUser } from "@/lib/normalise";
 import type { RuntimeSettings, User } from "@/lib/types";
-import { ErrorState, FixedNotice, LoadingState } from "@/components/ui";
+import { ErrorState, LoadingState } from "@/components/ui";
 
 type WorkspaceShellProps = {
   title: string;
@@ -117,7 +117,7 @@ export function WorkspaceShell({ title, children, actions }: WorkspaceShellProps
         </nav>
         <div className="sidebar-foot">
           <span className="status-pill status-neutral">Private workspace</span>
-          <p>{user.workspaceName ?? "Assessment sandbox"}</p>
+          <p>{user.workspaceName ?? "Your workspace"}</p>
         </div>
       </aside>
       {drawerOpen ? <button className="drawer-scrim" type="button" aria-label="Close navigation" onClick={() => setDrawerOpen(false)} /> : null}
@@ -144,7 +144,7 @@ export function WorkspaceShell({ title, children, actions }: WorkspaceShellProps
             <span className={`mode-badge ${modeLabel(runtime).toLowerCase().replaceAll(" ", "-")}`}>{modeLabel(runtime)}</span>
             {actions}
             <div className="user-menu-wrap">
-              <button className="user-menu-button" type="button" aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>
+              <button className="user-menu-button" type="button" aria-label="Open account menu" aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>
                 <span className="user-initial" aria-hidden="true">{user.displayName.slice(0, 1).toUpperCase()}</span>
                 <span className="user-name">{user.displayName}</span>
                 <span aria-hidden="true">⌄</span>
@@ -161,13 +161,8 @@ export function WorkspaceShell({ title, children, actions }: WorkspaceShellProps
             </div>
           </div>
         </header>
-        <div className="source-banner" role="note">
-          <span aria-hidden="true">▣</span>
-          Assessment dataset: 21–25 Sep 2026 · fictional Veridian Corp
-        </div>
         <main className="app-main">{children}</main>
       </div>
-      <FixedNotice />
     </div>
   );
 }

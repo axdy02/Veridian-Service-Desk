@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import { hashPassword } from '@veridian/domain/auth';
-import { seedPolicies, seedWorkspace } from '../apps/api/src/seeding.js';
+import { seedPolicies, seedWorkspace } from '../backend/src/seeding.js';
 import { createDatabasePool } from './database.js';
 
 const email = process.env.DEMO_REVIEWER_EMAIL?.trim().toLowerCase();

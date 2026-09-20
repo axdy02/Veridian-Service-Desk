@@ -36,7 +36,7 @@ export default defineConfig({
   webServer: [
     {
       command: 'npx tsx src/index.ts',
-      cwd: 'apps/api',
+      cwd: 'backend',
       url: `http://127.0.0.1:${apiPort}/api/health/live`,
       reuseExistingServer: !process.env.CI,
       env: {
@@ -55,7 +55,7 @@ export default defineConfig({
     },
     {
       command: `npx next dev -p ${webPort}`,
-      cwd: 'apps/web',
+      cwd: 'frontend',
       url: `http://localhost:${webPort}/login`,
       reuseExistingServer: !process.env.CI,
       env: {

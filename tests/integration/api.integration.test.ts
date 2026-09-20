@@ -112,7 +112,7 @@ before(async () => {
 
   golden = JSON.parse(await readFile(join(projectRoot, 'data/golden-cases.json'), 'utf8'));
 
-  const { createApp } = await import('../../apps/api/src/app.js');
+  const { createApp } = await import('../../backend/src/app.js');
   server = createServer(createApp());
   await new Promise<void>((resolveListen) => server.listen(0, '127.0.0.1', resolveListen));
   port = (server.address() as { port: number }).port;

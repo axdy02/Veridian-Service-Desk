@@ -7,8 +7,8 @@ WORKDIR /app
 
 FROM base AS dependencies
 COPY package.json package-lock.json ./
-COPY apps/api/package.json ./apps/api/package.json
-COPY apps/web/package.json ./apps/web/package.json
+COPY backend/package.json ./backend/package.json
+COPY frontend/package.json ./frontend/package.json
 COPY reference-core/package.json ./reference-core/package.json
 RUN npm ci
 
@@ -28,8 +28,8 @@ RUN npm run build --workspace=@veridian/api
 # image alongside production node_modules.
 FROM base AS production-dependencies
 COPY package.json package-lock.json ./
-COPY apps/api/package.json ./apps/api/package.json
-COPY apps/web/package.json ./apps/web/package.json
+COPY backend/package.json ./backend/package.json
+COPY frontend/package.json ./frontend/package.json
 COPY reference-core/package.json ./reference-core/package.json
 RUN npm ci --omit=dev
 
@@ -39,11 +39,11 @@ ENV NODE_ENV=production \
     PORT=3001
 
 COPY --from=production-dependencies --chown=node:node /app/node_modules ./node_modules
-COPY --from=builder --chown=node:node /app/apps/api/package.json ./apps/api/package.json
-COPY --from=builder --chown=node:node /app/apps/api/dist ./apps/api/dist
+COPY --from=builder --chown=node:node /app/backend/package.json ./backend/package.json
+COPY --from=builder --chown=node:node /app/backend/dist ./backend/dist
 COPY --from=builder --chown=node:node /app/reference-core ./reference-core
 COPY --from=builder --chown=node:node /app/data ./data
 
 USER node
 EXPOSE 3001
-CMD ["node", "apps/api/dist/index.js"]
+CMD ["node", "backend/dist/index.js"]

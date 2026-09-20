@@ -15,7 +15,6 @@ export function LoadingState({ label = "Loading workspace…" }: { label?: strin
     </div>
   );
 }
-
 export function ErrorState({
   message,
   onRetry,
@@ -36,7 +35,6 @@ export function ErrorState({
     </div>
   );
 }
-
 export function EmptyState({ title, children }: { title: string; children: ReactNode }) {
   return (
     <div className="state-box state-empty">
@@ -46,14 +44,5 @@ export function EmptyState({ title, children }: { title: string; children: React
         <p>{children}</p>
       </div>
     </div>
-  );
-}
-
-export function FixedNotice() {
-  return (
-    <aside className="fixed-notice" aria-label="Sandbox limitation">
-      <span aria-hidden="true">⌁</span>
-      <span>This sandbox records local guidance and handoffs only. It does not change external accounts or send email.</span>
-    </aside>
   );
 }

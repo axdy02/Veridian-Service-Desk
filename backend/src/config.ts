@@ -6,7 +6,7 @@ const apiDirectory = fileURLToPath(new URL('.', import.meta.url));
 
 // Local development reads the repository-root .env (documented in README). Environment
 // variables that are already set — for example the values Docker Compose injects — always win.
-dotenv.config({ path: resolve(apiDirectory, '../../../.env'), override: false, quiet: true });
+dotenv.config({ path: resolve(apiDirectory, '../../.env'), override: false, quiet: true });
 
 function intFromEnv(name: string, fallback: number, min: number, max: number): number {
   const raw = process.env[name];
@@ -26,12 +26,12 @@ const configuredAgentMode = process.env.AGENT_MODE?.trim().toLowerCase();
 export const config = {
   environment: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   port: intFromEnv('PORT', intFromEnv('API_PORT', 3001, 1, 65535), 1, 65535),
-  appOrigin: process.env.APP_ORIGIN?.trim() || 'http://localhost:3000',
+  appOrigin: (process.env.APP_ORIGIN?.trim() || 'http://localhost:3000').replace(/\/$/, ''),
   // Docker Compose supplies POSTGRES_HOST=postgres. Keeping this explicit means the API never
   // relies on a container's localhost to reach PostgreSQL.
   databaseUrl: process.env.DATABASE_URL?.trim() || undefined,
   postgres: {
-    host: process.env.POSTGRES_HOST?.trim() || process.env.PGHOST?.trim() || 'postgres',
+    host: process.env.POSTGRES_HOST?.trim() || process.env.PGHOST?.trim() || 'localhost',
     port: intFromEnv('POSTGRES_PORT', intFromEnv('PGPORT', 5432, 1, 65535), 1, 65535),
     database: process.env.POSTGRES_DB?.trim() || process.env.PGDATABASE?.trim() || 'veridian',
     user: process.env.POSTGRES_USER?.trim() || process.env.PGUSER?.trim() || 'veridian',
@@ -45,7 +45,7 @@ export const config = {
   agentMode: configuredAgentMode === 'gemini' || configuredAgentMode === 'offline' ? configuredAgentMode : 'auto',
   geminiApiKey: process.env.GEMINI_API_KEY?.trim() || undefined,
   geminiModel: process.env.GEMINI_MODEL?.trim() || 'gemini-2.5-flash',
-  dataDirectory: process.env.VERIDIAN_DATA_DIR?.trim() || resolve(apiDirectory, '../../../data'),
+  dataDirectory: process.env.VERIDIAN_DATA_DIR?.trim() || resolve(apiDirectory, '../../data'),
   maxJsonBytes: '64kb',
   // Defaults keep the documented local behaviour. The e2e suite raises the caps through env
   // because many accounts are created from one test IP; production values are unchanged.

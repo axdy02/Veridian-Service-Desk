@@ -22,7 +22,7 @@ services:
   migrate:
     build:
       context: .
-      dockerfile: apps/api/Dockerfile
+      dockerfile: backend/Dockerfile
       target: migration
     environment:
       NODE_ENV: production
@@ -42,7 +42,7 @@ services:
   backend:
     build:
       context: .
-      dockerfile: apps/api/Dockerfile
+      dockerfile: backend/Dockerfile
       target: runner
     restart: unless-stopped
     environment:
@@ -82,7 +82,7 @@ services:
   frontend:
     build:
       context: .
-      dockerfile: apps/web/Dockerfile
+      dockerfile: frontend/Dockerfile
       target: runner
     restart: unless-stopped
     environment:

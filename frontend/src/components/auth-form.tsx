@@ -76,7 +76,7 @@ export function AuthForm({ mode }: AuthFormProps) {
         <p className="wordmark">Veridian</p>
         <p className="auth-kicker">Service Desk</p>
         <h1 id="auth-title">{title}</h1>
-        <p className="auth-description">Private assessment sandbox</p>
+        <p className="auth-description">A focused workspace for requests and reviews.</p>
 
         <div className="auth-switch" aria-label="Authentication mode">
           <Link className={!isSignup ? "auth-switch-link active" : "auth-switch-link"} href="/login">Sign in</Link>
@@ -144,7 +144,6 @@ export function AuthForm({ mode }: AuthFormProps) {
           </button>
         </form>
       </section>
-      <p className="auth-footer">Assessment dataset · fictional Veridian Corp · 21–25 Sep 2026</p>
     </main>
   );
 }

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { api, errorMessage } from "@/lib/api";
+import { sourceLabel } from "@/lib/format";
 import { list, normalisePolicy, record } from "@/lib/normalise";
 import type { Policy } from "@/lib/types";
 import { EmptyState, ErrorState, LoadingState } from "@/components/ui";
@@ -18,7 +19,7 @@ export function KnowledgeClient() {
     setLoading(true);
     setError("");
     try {
-      const suffix = appliedSearch.trim() ? `?search=${encodeURIComponent(appliedSearch.trim())}` : "";
+      const suffix = appliedSearch.trim() ? `?q=${encodeURIComponent(appliedSearch.trim())}` : "";
       const response = await api<unknown>(`/api/policies${suffix}`);
       const source = record(response);
       setPolicies(list(source.items ?? response).map(normalisePolicy));
@@ -55,7 +56,7 @@ export function KnowledgeClient() {
             <div className="policy-card-header"><span className="source-card-id">{policy.id}</span><span>{policy.authority ?? "Policy"}</span></div>
             <h3>{policy.title}</h3>
             <p>{policy.text}</p>
-            <dl className="policy-meta"><div><dt>Source</dt><dd>{policy.sourceFile ?? "Source file not recorded"}</dd></div><div><dt>Reference</dt><dd>{policy.page ? `Page ${policy.page}` : "Page not recorded"}{policy.section ? ` · ${policy.section}` : ""}</dd></div>{policy.issuer ? <div><dt>Issuer</dt><dd>{policy.issuer}</dd></div> : null}</dl>
+            <dl className="policy-meta"><div><dt>Source</dt><dd>{sourceLabel(policy.sourceFile)}</dd></div><div><dt>Reference</dt><dd>{policy.page ? `Page ${policy.page}` : "Page not recorded"}{policy.section ? ` · ${policy.section}` : ""}</dd></div>{policy.issuer ? <div><dt>Issuer</dt><dd>{policy.issuer}</dd></div> : null}</dl>
             {policy.relatedConflictIds?.length && policy.relatedConflictIds.filter((id) => id !== policy.id).length ? <p className="policy-conflict">Conflict reference: {policy.relatedConflictIds.filter((id) => id !== policy.id).map((id, index) => <span key={id}>{index ? ", " : ""}<Link href={`#policy-${id}`}>{id}</Link></span>)}</p> : null}
           </article>
         ))}</div> : null}

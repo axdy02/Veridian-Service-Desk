@@ -44,3 +44,8 @@ export function shorten(value: string, maxLength: number): string {
   if (value.length <= maxLength) return value;
   return `${value.slice(0, Math.max(0, maxLength - 1)).trimEnd()}…`;
 }
+
+export function sourceLabel(value?: string | null): string {
+  if (!value) return "Source record";
+  return /assignment|datapack/i.test(value) ? "Internal policy source" : value;
+}

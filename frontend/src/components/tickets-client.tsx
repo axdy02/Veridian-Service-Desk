@@ -19,7 +19,7 @@ export function TicketsClient() {
     setLoading(true);
     setError("");
     try {
-      const params = new URLSearchParams({ status: filter });
+      const params = new URLSearchParams({ view: filter });
       if (route !== "all") params.set("route", route);
       const response = await api<unknown>(`/api/tickets?${params.toString()}`);
       const source = record(response);

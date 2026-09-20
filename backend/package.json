@@ -13,7 +13,7 @@
     "@langchain/core": "1.2.12",
     "@langchain/google": "0.2.6",
     "@langchain/langgraph": "1.4.16",
-    "@veridian/domain": "file:../../reference-core",
+    "@veridian/domain": "file:../reference-core",
     "dotenv": "16.6.1",
     "express": "5.2.1",
     "pg": "8.23.0",

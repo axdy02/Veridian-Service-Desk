@@ -281,7 +281,7 @@ export function createApp() {
           'INSERT INTO users (id, email, display_name, password_hash) VALUES ($1, $2, $3, $4)',
           [userId, input.email, input.displayName, passwordHash]
         );
-        await client.query('INSERT INTO workspaces (id, owner_user_id, name) VALUES ($1, $2, $3)', [workspaceId, userId, 'Assessment sandbox']);
+        await client.query('INSERT INTO workspaces (id, owner_user_id, name) VALUES ($1, $2, $3)', [workspaceId, userId, 'Your workspace']);
         await seedWorkspace(client, { workspaceId, ownerUserId: userId });
         await appendAudit(client, { workspaceId, actorUserId: userId, eventType: 'ACCOUNT_CREATED', payload: {} });
         const newSession = await createSession(client, userId);
@@ -403,7 +403,7 @@ export function createApp() {
     const actor = requireActor(request as AuthenticatedRequest);
     const caseId = idSchema.parse(request.params.id);
     const row = await readOwnedCase(actor, caseId);
-    const [messages, ticket] = await Promise.all([
+    const [messages, ticket, latestRun] = await Promise.all([
       query<{ id: string; role: string; content: string; metadata: Record<string, unknown>; created_at: Date | string }>(
         `SELECT id, role, content, metadata, created_at FROM messages
          WHERE workspace_id = $1 AND case_id = $2 ORDER BY created_at ASC, id ASC`,
@@ -413,6 +413,14 @@ export function createApp() {
         `SELECT id, workspace_id, case_id, display_id, route, state, original_status, summary, reason_code,
                 policy_source_ids, history_source_ids, created_at, updated_at
          FROM service_tickets WHERE workspace_id = $1 AND case_id = $2`,
+        [actor.workspaceId, caseId]
+      ),
+      query<{
+        id: string; status: string; agent_mode: string | null; result: unknown | null; safe_error_code: string | null; started_at: Date | string; finished_at: Date | string | null;
+      }>(
+        `SELECT id, status, agent_mode, result, safe_error_code, started_at, finished_at
+         FROM runs WHERE workspace_id = $1 AND case_id = $2
+         ORDER BY started_at DESC, id DESC LIMIT 1`,
         [actor.workspaceId, caseId]
       )
     ]);
@@ -428,6 +436,7 @@ export function createApp() {
         messages: messages.rows.map((message) => ({ id: message.id, role: message.role, content: message.content, metadata: message.metadata, createdAt: iso(message.created_at) })),
         decision: row.last_decision,
         ticket: ticket.rows[0] ? mapTicket(ticket.rows[0]) : null,
+        latestRun: latestRun.rows[0] ? mapRun(latestRun.rows[0]) : null,
         policies: policyIds.flatMap((id) => {
           const policy = byPolicyId.get(id);
           if (!policy) return [];
@@ -538,15 +547,22 @@ export function createApp() {
     const actor = requireActor(request as AuthenticatedRequest);
     const view = typeof request.query.view === 'string' ? request.query.view : 'all';
     if (!['all', 'open', 'history'].includes(view)) throw new AppError(400, 'INVALID_INPUT', 'Unknown ticket filter.');
+    const route = typeof request.query.route === 'string' ? request.query.route : undefined;
+    if (route && !['IT', 'SECURITY', 'FINANCE', 'MANAGER', 'IT_FINANCE', 'MANAGER_FINANCE'].includes(route)) {
+      throw new AppError(400, 'INVALID_INPUT', 'Unknown ticket queue.');
+    }
     const limit = z.coerce.number().int().min(1).max(100).default(50).parse(request.query.limit);
     const offset = z.coerce.number().int().min(0).max(10_000).default(0).parse(request.query.offset);
-    const filter = view === 'open' ? 'AND c.active = true' : view === 'history' ? 'AND c.active = false' : '';
+    const stateFilter = view === 'open' ? 'AND c.active = true' : view === 'history' ? 'AND c.active = false' : '';
+    const values: Array<string | number> = [actor.workspaceId];
+    const routeFilter = route ? `AND t.route = $${values.push(route)}` : '';
+    values.push(limit, offset);
     const tickets = await query<TicketRow>(
       `SELECT t.id, t.workspace_id, t.case_id, t.display_id, t.route, t.state, t.original_status, t.summary, t.reason_code,
               t.policy_source_ids, t.history_source_ids, t.created_at, t.updated_at, c.source_id, c.active
        FROM service_tickets t JOIN cases c ON c.id = t.case_id AND c.workspace_id = t.workspace_id
-       WHERE t.workspace_id = $1 ${filter} ORDER BY t.updated_at DESC, t.id DESC LIMIT $2 OFFSET $3`,
-      [actor.workspaceId, limit, offset]
+       WHERE t.workspace_id = $1 ${stateFilter} ${routeFilter} ORDER BY t.updated_at DESC, t.id DESC LIMIT $${values.length - 1} OFFSET $${values.length}`,
+      values
     );
     response.json({ data: { items: tickets.rows.map(mapTicket) } });
   }));
@@ -598,7 +614,7 @@ export function createApp() {
       model: config.geminiModel,
       geminiConfigured: Boolean(config.geminiApiKey),
       sourceVersion: '2026-09-21-to-2026-09-25',
-      limitation: 'This private assessment sandbox records local guidance and handoffs only; it does not change external accounts or send emails.'
+      limitation: 'This workspace records local guidance and handoffs only; it does not change external accounts or send emails.'
     } });
   });
 

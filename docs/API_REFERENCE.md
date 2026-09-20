@@ -14,7 +14,7 @@ on failure.
   `x-vds-request: 1` header and a JSON content type. Otherwise `403 ORIGIN_REJECTED`.
 - **Scoping**: every query is scoped by the authenticated workspace; foreign resources
   return `404`, never another tenant's data.
-- **Rate limits** (defaults, configurable in `apps/api/src/config.ts`): 10 auth requests and
+- **Rate limits** (defaults, configurable in `backend/src/config.ts`): 10 auth requests and
   30 agent runs per 10 minutes. Exceeding them returns `429 RATE_LIMITED`.
 - **Historical cases** (`active = false` or work state CLOSED) refuse every mutation with
   `409 CASE_READ_ONLY`; this is enforced server-side, not only in the UI.

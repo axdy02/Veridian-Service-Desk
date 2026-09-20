@@ -15,9 +15,9 @@ view supporting policy passages, inspect/upsert structured tickets, and inspect 
 recorded audit events. New custom cases use the same logic, not a lookup by request ID.
 
 ## Fixed architecture
-- `apps/web`: Next.js App Router + TypeScript + React. System fonts; plain CSS or Tailwind
+- `frontend`: Next.js App Router + TypeScript + React. System fonts; plain CSS or Tailwind
   only if the implementation is already comfortable with it. No required design service.
-- `apps/api`: Node.js + Express + TypeScript. All AI, session, database and authorization
+- `backend`: Node.js + Express + TypeScript. All AI, session, database and authorization
   code lives here. The browser cannot call Gemini or the database directly.
 - PostgreSQL with the `pg` driver, parameterized SQL, committed SQL migrations. Do not
   add Prisma for this timebox: the reference SQL is already defined and no ORM is needed.
@@ -47,8 +47,8 @@ and `127.0.0.1` in browser-visible origins. The internal API address may use 127
 
 ## Repository layout
 ```
-apps/web/                 Next.js UI
-apps/api/src/             Express, auth, repositories, graph adapter
+frontend/                 Next.js UI
+backend/src/              Express, auth, repositories, graph adapter
 reference-core/         supplied kernel, typed declarations and domain tests
 data/                    normalized source JSON, source manifest; no credentials
 migrations/              versioned PostgreSQL SQL

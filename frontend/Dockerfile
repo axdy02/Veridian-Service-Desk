@@ -8,8 +8,8 @@ ENV NEXT_TELEMETRY_DISABLED=1
 
 FROM base AS dependencies
 COPY package.json package-lock.json ./
-COPY apps/api/package.json ./apps/api/package.json
-COPY apps/web/package.json ./apps/web/package.json
+COPY backend/package.json ./backend/package.json
+COPY frontend/package.json ./frontend/package.json
 COPY reference-core/package.json ./reference-core/package.json
 RUN npm ci
 
@@ -17,7 +17,7 @@ FROM dependencies AS builder
 COPY . .
 # The public directory is optional in Next.js, but creating it keeps the explicit
 # runtime copy below valid when an application has no public assets yet.
-RUN mkdir -p apps/web/public
+RUN mkdir -p frontend/public
 RUN npm run build --workspace=@veridian/web
 
 # Next's standalone output includes only the traced server and runtime dependencies.
@@ -32,10 +32,10 @@ ENV NODE_ENV=production \
 RUN groupadd --system --gid 1001 nextjs \
     && useradd --system --uid 1001 --gid nextjs nextjs
 
-COPY --from=builder --chown=nextjs:nextjs /app/apps/web/.next/standalone ./
-COPY --from=builder --chown=nextjs:nextjs /app/apps/web/.next/static ./apps/web/.next/static
-COPY --from=builder --chown=nextjs:nextjs /app/apps/web/public ./apps/web/public
+COPY --from=builder --chown=nextjs:nextjs /app/frontend/.next/standalone ./
+COPY --from=builder --chown=nextjs:nextjs /app/frontend/.next/static ./frontend/.next/static
+COPY --from=builder --chown=nextjs:nextjs /app/frontend/public ./frontend/public
 
 USER nextjs
 EXPOSE 3000
-CMD ["node", "apps/web/server.js"]
+CMD ["node", "frontend/server.js"]

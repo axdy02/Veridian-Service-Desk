@@ -124,7 +124,7 @@ export async function revokeSession(request: Request): Promise<void> {
 }
 
 export function publicActor(actor: Actor) {
-  return { id: actor.userId, email: actor.email, displayName: actor.displayName, workspace: { id: actor.workspaceId, name: 'Assessment sandbox' } };
+  return { id: actor.userId, email: actor.email, displayName: actor.displayName, workspace: { id: actor.workspaceId, name: 'Your workspace' } };
 }
 
 export { randomUUID };

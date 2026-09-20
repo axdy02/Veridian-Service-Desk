@@ -8,7 +8,8 @@
     "node": ">=22.16.0 <25"
   },
   "workspaces": [
-    "apps/*",
+    "backend",
+    "frontend",
     "reference-core"
   ],
   "scripts": {
